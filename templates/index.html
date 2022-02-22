@@ -5,13 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <header>
-
+    <header class="cabecalho">
+        <img class="nav-img">
+        <nav class="nav-head">
+            <h1 class="nav-title">Dashboard Cronos</h1>
+        </nav>
     </header>
-    <main>
-
+    <main class="corpo">
+        <section class="conteudo-principal">
+            <div class="linha1">
+                <div class="kpi">
+                    <h3 class="kpi-title">Peso Vendido Hoje</h3>
+                    <p class="kpi-value">{{ peso }} KG</p>
+                </div>
+            </div>
+            <div class="linha1">
+                <div class="kpi">
+                    <h3 class="kpi-title">Vendas Hoje</h3>
+                    <p class="kpi-value">{{ vendas }}</p>
+                </div>
+            </div>
+        </section>
     </main>
     <footer>
         
