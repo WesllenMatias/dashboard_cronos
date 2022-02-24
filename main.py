@@ -40,7 +40,16 @@ def home():
         qtd_canceladas = consulta.QtdCanceladas()
         perc_cancel = (qtd_canceladas * 100) / qtd_vendido
         perc_cancel = round(perc_cancel,2)
+    #Taxa de Conversao
+    if qtd_vendido == 0:
+        tx_conversao = 0
+        nvendido = 0
+    else:
+        nvendido = consulta.QtdNaoVendido()
+        tx_conversao = ((qtd_vendido / nvendido) * 100)
+        tx_conversao = round(tx_conversao)
     return render_template('index.html', peso=pesovendido,vendas=vendido,nvendas=qtd_vendido, canceladas=qtd_canceladas
-                            ,percent_cancel = perc_cancel)
+                            ,percent_cancel = perc_cancel
+                            ,tx_convert = tx_conversao)
 
 app.run(host="0.0.0.0",port=7000)

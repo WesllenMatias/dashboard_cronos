@@ -6,15 +6,32 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color:#403075;
+}
+
+.nav-img {
+    margin-top: 5px;
+    padding-left: 30px;
+    height: 30px;
+    
+}
+
+.cabeca {
+    background-color:#403075;
+    margin-bottom: 100px;
+}
+
 .cabecalho {
     display: flex;
     background-color: #13073A;
     height: 40px;
+    
 }
 .nav-head {
     display: flex;
     flex-direction: row;
-    padding-left: 100px;
+    padding-left: 38px;
     align-items: center;
 }
 
@@ -39,8 +56,8 @@
     display: flex;
     flex-direction: row;
     gap: 30px;
-    padding-top: 100px;
     padding-left: 100px;
+    margin-bottom: 40px;
 }
 
 .kpi {
