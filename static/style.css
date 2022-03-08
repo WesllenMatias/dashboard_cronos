@@ -77,3 +77,59 @@ body {
     font-size: 40px;
     color: white;
 }
+
+.login-conteudo {
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.head-login {
+    background-color: #13073A;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 150px;
+    padding-right: 150px;
+    
+}
+
+.tittle-login {
+    color: white;
+    font-family: 'Nunito', sans-serif;
+}
+
+.body-login {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: darkslateblue;
+    padding: 0px 72px 55px;
+}
+
+.lb-login {
+    padding: 10px;
+}
+
+.lb-login {
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 30px;
+}
+.btn-login {
+    margin-top: 30px;
+    padding: 5px;
+    background-color: #13073A;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    border-radius: 10px;
+    border-bottom: #403075;
+}
+
+.input-login {
+    height: 30px;
+    border-radius: 5px;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+}
