@@ -1,13 +1,13 @@
 from asyncio.base_events import Server
 from http import server
-from flask import render_template
+from flask import Flask,render_template
 import pymssql
 import consulta
 import locale
 
 
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
 
 
 @app.route('/')
