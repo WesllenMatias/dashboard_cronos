@@ -48,8 +48,19 @@ def home():
         nvendido = consulta.QtdNaoVendido()
         tx_conversao = ((qtd_vendido / nvendido) * 100)
         tx_conversao = round(tx_conversao)
+
+    ranking = consulta.RkVendedores()
+    for posicao in ranking:
+        vendedor = []
+        totalvd = []
+        vendedor.append(posicao[0])
+        totalvd.append(posicao[1])    
+
     return render_template('index.html', peso=pesovendido,vendas=vendido,nvendas=qtd_vendido, canceladas=qtd_canceladas
                             ,percent_cancel = perc_cancel
-                            ,tx_convert = tx_conversao)
+                            ,tx_convert = tx_conversao
+                            ,vendedor = vendedor
+                            ,totalvd = totalvd
+                            ,rank = ranking)
 
 app.run(host="0.0.0.0",port=7000)

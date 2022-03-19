@@ -57,3 +57,21 @@ def QtdNaoVendido():
     sql.close()
     
     return qtd_nvendido
+
+def RkVendedores():
+    conn = pymssql.connect(server=config.servidor, port=config.porta, 
+                    database=config.db, user=config.user, password=config.passwd)
+    sql = conn.cursor()
+    sql.execute("""SELECT TOP 5 v.NomeVendedor , SUM(m.TotMov) FROM Movimento m 
+    JOIN Vendedores v on m.CodVendedor = v.CodVendedor 
+    WHERE DtMov = CONVERT(DATE,GETDATE()) AND NotaFiscalImpressa = 'S' AND
+    Status != 'C' GROUP BY v.NomeVendedor 
+    ORDER BY SUM (m.TotMov) DESC;""")
+    row = sql.fetchall()
+    rkvendas = row
+    sql.close()
+    
+    return rkvendas
+
+
+RkVendedores()
