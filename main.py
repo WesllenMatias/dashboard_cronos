@@ -1,13 +1,22 @@
 from asyncio.base_events import Server
+from atexit import register
+from crypt import methods
+from distutils.log import Log
 from http import server
-from flask import Flask,render_template
-import pymssql
+from flask import Flask,render_template,flash
+from flask_login import LoginManager
 import consulta
 import locale
 
 
 
 app = Flask(__name__)
+login_manager = LoginManager(app)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
 
 
 @app.route('/')
@@ -62,5 +71,13 @@ def home():
                             ,vendedor = vendedor
                             ,totalvd = totalvd
                             ,rank = ranking)
+
+
+
+@app.route('/login', methods=['GET','POST'])
+def login():
+    return render_template('login.html')
+
+
 
 app.run(host="0.0.0.0",port=7000)
