@@ -1,6 +1,6 @@
 from asyncio.base_events import Server
 from atexit import register
-from crypt import methods
+#from crypt import methods
 from distutils.log import Log
 from http import server
 from flask import Flask,render_template,flash,redirect,url_for
@@ -16,6 +16,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@localhost/dash_db'
 login_manager = LoginManager(app)
 db = SQLAlchemy(app)
+app.config['SECRET_KEY'] = '2qybcjqw'
+
 
 
 @login_manager.user_loader
@@ -80,6 +82,18 @@ def home():
 
 @app.route('/login', methods=['GET','POST'])
 def login():
+    if request.method =='POST':
+        email = request.form['email']
+        pwd = request.form['password']
+
+        user = User.query.filter_by(email=email).frist()
+
+        if not user or not verify_password(pwd):
+            return redirect(url_for('login'))
+
+        login_user(user)
+        return redirect(url_for('/'))
+
     return render_template('login.html')
 
 

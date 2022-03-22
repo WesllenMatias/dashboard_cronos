@@ -1,10 +1,16 @@
 from enum import unique
-from app import db
+#from app import db
 from werkzeug.security import check_password_hash, generate_password_hash
+from flask_login import UserMixin, login_manager
 
 
 
-class User(db.model):
+@login_manager.user_loader
+def get_user(user_id):
+    return User.query.filter_by(user_id).frist()
+
+
+class User(db.model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer,autoincrement=True, primary_key=True)
     name = db.Column(db.String(100),nullable=False)
