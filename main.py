@@ -3,15 +3,19 @@ from atexit import register
 from crypt import methods
 from distutils.log import Log
 from http import server
-from flask import Flask,render_template,flash
-from flask_login import LoginManager
+from flask import Flask,render_template,flash,redirect,url_for
+from flask_login import LoginManager, login_user,logout_user
+from flask_sqlalchemy import SQLAlchemy
+from models import User
 import consulta
 import locale
 
 
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@localhost/dash_db'
 login_manager = LoginManager(app)
+db = SQLAlchemy(app)
 
 
 @login_manager.user_loader
@@ -77,6 +81,12 @@ def home():
 @app.route('/login', methods=['GET','POST'])
 def login():
     return render_template('login.html')
+
+
+@app.route('/logout', methods=['GET','POST'])
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 
 
