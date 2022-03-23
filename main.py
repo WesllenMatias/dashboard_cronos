@@ -3,10 +3,10 @@ from atexit import register
 #from crypt import methods
 from distutils.log import Log
 from http import server
-from flask import Flask,render_template,flash,redirect,url_for
+from flask import Flask,render_template,flash,redirect,url_for,request
 from flask_login import LoginManager, login_user,logout_user
 from flask_sqlalchemy import SQLAlchemy
-from models import User
+import models
 import consulta
 import locale
 
@@ -22,7 +22,7 @@ app.config['SECRET_KEY'] = '2qybcjqw'
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.get(user_id)
+    return models.User.get(user_id)
 
 
 @app.route('/')
@@ -82,11 +82,11 @@ def home():
 
 @app.route('/login', methods=['GET','POST'])
 def login():
-    if request.method =='POST':
+    if request.method == 'POST':
         email = request.form['email']
         pwd = request.form['password']
 
-        user = User.query.filter_by(email=email).frist()
+        user = models.User.query.filter_by(email=email).frist()
 
         if not user or not verify_password(pwd):
             return redirect(url_for('login'))

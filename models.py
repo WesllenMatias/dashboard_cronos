@@ -1,8 +1,8 @@
 from enum import unique
 #from app import db
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask_login import UserMixin, login_manager
-
+from flask_login import UserMixin
+from main import login_manager
 
 
 @login_manager.user_loader
