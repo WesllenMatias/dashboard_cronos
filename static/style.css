@@ -52,6 +52,13 @@ body {
     background-color: darkslateblue;
 }
 
+.linha2 {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 40px;
+    background-color: darkslateblue;
+    
+}
+
 .conteudo-principal {
     display: flex;
     flex-direction: row;

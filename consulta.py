@@ -74,4 +74,4 @@ def RkVendedores():
     return rkvendas
 
 
-RkVendedores()
+#RkVendedores()

@@ -7,6 +7,35 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="/static/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+       google.charts.load('current', {'packages':['gauge']});
+       google.charts.setOnLoadCallback(drawChart);
+ 
+       function drawChart() {
+ 
+         var data = google.visualization.arrayToDataTable([
+           ['Label', 'Value'],
+           ['', {{ nvendas }}],
+         ]);
+ 
+         var options = {
+           width: 400, height: 220,
+           redFrom: 90, redTo: 100,
+           yellowFrom:75, yellowTo: 90,
+           minorTicks: 5
+         };
+ 
+         var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+ 
+         chart.draw(data, options);
+ 
+         setInterval(function() {
+           data.setValue(1, 1, {{ nvendas }});
+           chart.draw(data, options);
+         }, 5000);
+       }
+     </script>
 </head>
 <body>
     <header class="cabeca">
@@ -20,12 +49,12 @@
     </header>
     <main class="corpo">
         <section class="conteudo-principal">
-            <div class="linha1">
-                <div class="kpi">
+           <!--  <div class="linha1">
+               <div class="kpi">
                     <h3 class="kpi-title">Peso Vendido Hoje</h3>
                     <p class="kpi-value">{{ peso }} KG</p>
-                </div>
-            </div>
+                </div> 
+            </div>-->
             <div class="linha1">
                 <div class="kpi">
                     <h3 class="kpi-title">Faturado Hoje</h3>
@@ -44,63 +73,72 @@
                     <p class="kpi-value">{{ canceladas }}</p>
                 </div>
             </div>
-        </section>
-        <section class="conteudo-principal">
             <div class="linha1">
                 <div class="kpi">
                     <h3 class="kpi-title">Taxa de Cancelamento</h3>
                     <p class="kpi-value">{{ percent_cancel }} %</p>
                 </div>
             </div>
-            <div class="linha1">
+        </section>
+        <section class="conteudo-principal">
+            <!--<div class="linha1">
                 <div class="kpi">
                     <h3 class="kpi-title">Taxa de Conversão</h3>
                     <p class="kpi-value">{{ tx_convert }} %</p>
                 </div>
-            </div>
+            </div> -->
             <div class="linha1">
-                <h3 class="kpi-title">Ranking</h3>
-                <canvas id="myChart" width="500" height="200"></canvas>
-                <script>
-                const ctx = document.getElementById('myChart').getContext('2d');
-                const myChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                    
-                        labels: [{% for nome in rank %}'{{ nome[0] }}',{%endfor%}],
-                    
-                        datasets: [{
-                            label: '# Vendas',
-                            data: [{% for nome in rank %}'{{ nome[1] }}',{%endfor%}],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
+                <div class="kpi">
+                    <h3 class="kpi-title">Ranking</h3>
+                    <canvas id="myChart" width="500" height="200"></canvas>
+                    <script>
+                    const ctx = document.getElementById('myChart').getContext('2d');
+                    const myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                        
+                            labels: [{% for nome in rank %}'{{ nome[0] }}',{%endfor%}],
+                        
+                            datasets: [{
+                                label: '# Vendas',
+                                data: [{% for nome in rank %}'{{ nome[1] }}',{%endfor%}],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
                             }
                         }
-                    }
-                });
-                </script>
-
+                    });
+                    </script>
+                </div>
+            </div>
+            <div class="linha2">
+                <div class="kpi">
+                    <h3 class="kpi-title">Meta Vendas Por Dia</h3>
+                    <div id="chart_div">
+        
+                    </div>
+                </div>
             </div>
         </section>
     </main>
