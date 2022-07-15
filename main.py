@@ -13,7 +13,7 @@ import locale
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@localhost/dash_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@10.0.0.155/dash_db'
 login_manager = LoginManager(app)
 db = SQLAlchemy(app)
 app.config['SECRET_KEY'] = '2qybcjqw'
